@@ -1,0 +1,176 @@
+h1{
+	font-size: 35px;
+    text-align: center;
+}
+
+.newsFeed{
+	border-style:blue; 
+}
+
+.wassup{
+	border: 3px solid black
+	color: yellow;
+}
+.feed{
+	margin-top: 10px;
+	border:3px solid black;
+  background-color: white;
+	height:900px;
+	width: 900px;
+	margin:auto;
+  overflow: scroll;
+}
+
+#title{
+	font-size:30px;
+}
+#curateHome{
+  text-align: center;
+}
+#registerForm{
+  text-align: center;
+}
+#registerBox{
+  /*height: 300px;*/
+  /*width: 300px;*/
+  /*border: 5px solid red;*/
+  /*position: absolute;*/
+
+}
+
+#searchBar{
+     position: absolute;
+     height: 30px;
+     width: 300px;
+  z-index: 15;
+  top: 30%;
+  left: 40%;
+  margin: -100px 0 0 -150px;
+}
+
+#searchDiv{
+  text-align: center;
+}
+.curate{
+  font-family: 'Gaegu', cursive;
+  font-size: 30px;
+  color: blue;
+  width:330px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 50px;
+}
+.homelink{
+  display: inline-block;
+  width: 30px;
+  border:1px solid green ; 
+}
+
+.feedBorder{
+  border: 1px solid red;
+  border:1px solid yellow ;
+  /*height:50px; */
+}
+
+.homeFeed{
+  display: inline-block;
+  white-space: nowrap;
+  border:1px solid blue ; 
+  font-size: 10px;
+  /*width:9%;*/
+}
+.titleFeed{
+  display: inline-block;
+  white-space: nowrap;
+  border:1px solid black ; 
+  width: 39%;
+  font-size: 10px;
+}
+.contentFeed{
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border:1px solid purple ; 
+  width: 40%;
+  font-size: 10px;
+}
+
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4c242
+}
+
+img{
+  margin-top: 20px;
+  height:280px;
+  width:280px;
+}
+ul{
+  list-style-type: none;
+}
+.nav ul {
+  list-style: none;
+  background-color: #444;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.nav li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  line-height: 40px;
+  height: 40px;
+  border-bottom: 1px solid #888;
+}
+ 
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  background-color: #005f5f;
+}
+ 
+.nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+ 
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+  }
+ 
+  /* Option 1 - Display Inline */
+  .nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+ 
+  /* Options 2 - Float
+  .nav li {
+    float: left;
+  }
+  .nav ul {
+    overflow: auto;
+    width: 600px;
+    margin: 0 auto;
+  }
+  .nav {
+    background-color: #444;
+  }
+  */
+}
