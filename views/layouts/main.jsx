@@ -62,8 +62,9 @@ class LayoutContainer extends React.Component{
 						        <li id="home" class="active"><a href="/">Home</a></li>
 						        <li id="feed"><a  href="/feed">Feed</a></li>
 						        <li id="customise"><a href="/feed/curate">Curate</a></li>
-						        <li id="login"><a href="/users/register">Login</a></li>
-						        <li id="about"><a href="#">About</a></li>
+						        <li id="login"><a href="/users/login">Login</a></li>
+						        <li id="register"><a href="/users/register">Register</a></li>
+						        <li id="about"><a href="/users/about">About</a></li>
 					     	</ul>
 				    	</div>
   					</header>
@@ -71,6 +72,7 @@ class LayoutContainer extends React.Component{
 				<body>
 					{this.props.children}
 				</body>
+				<script src="/Script/script.js"></script>
 			</html>
 			)
 	}

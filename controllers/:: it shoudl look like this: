@@ -1,0 +1,73 @@
+// it shoudl look like this:
+
+
+
+var allFeedItemObjects = [
+	
+
+	{
+		display:"http://www.bbc.com",
+		feedItems : [
+			{
+				title: "hello",
+				content: "foobar",
+				link: "http://ffo.bar.com"
+			},
+			{
+				title: "hello",
+				content: "foobar",
+				link: "http://ffo.bar.com"
+			},
+		]
+	},
+	{
+		display:"http://www.bbc.com",
+		feedItems : [
+			{
+				title: "hello",
+				content: "foobar",
+				link: "http://ffo.bar.com"
+			},
+			{
+				title: "hello",
+				content: "foobar",
+				link: "http://ffo.bar.com"
+			},
+		]
+	}
+]
+
+1. Create feedItemObj
+2.Inside feedItem obj is a key called feed items and the value is an array
+feedIteobj['display']= display
+
+
+what you currently have:
+container[i][j] = foo
+var container = [
+	[
+		{
+			title: "hello",
+			content: "foobar",
+			link: "http://ffo.bar.com"
+		},
+		{
+			title: "hello",
+			content: "foobar",
+			link: "http://ffo.bar.com"
+		},
+		kjhkjhk
+	],
+	[
+		{
+			title: "hello",
+			content: "foobar",
+			link: "http://ffo.bar.com"
+		},
+		{
+			title: "hello",
+			content: "foobar",
+			link: "http://ffo.bar.com"
+		},
+	]
+]

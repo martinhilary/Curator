@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(express.static('public'));
-ap
 
 // Set jsx to be the default view engine
 const reactEngine = require('express-react-views').createEngine();

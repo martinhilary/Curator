@@ -27,182 +27,125 @@
    */
 
 module.exports = function(db){
-const Parser= require("rss-parser")
-const parser= new Parser();
-var feed = require('../models/feed.js')(db)
-var bbc=[];
-var cnn=[];
-var cbn=[];
-var nyt=[];
-var wired=[];
-var verge=[];
-var counter= 0;
+	const Parser= require("rss-parser")
+	const parser= new Parser();
+	var feed = require('../models/feed.js')(db)
+	var bbc=[];
+	var cnn=[];
+	var cbn=[];
+	var nyt=[];
+	var wired=[];
+	var verge=[];
+	var countURLsParsed= 0;
 
-const curate = (request,response)=>{
-	response.render('../views/users/curate')
-}
+	const curate = (request,response)=>{
+
+		response.render('../views/users/curate')
+	}
 
 
-const newsParser = (request, response) => {
-	feed.bbcFeed( function(err,result) {
-		if(err){
-			console.log("query error:",err.stack)
-		}else{
-			counter = 0;
-			// this is where you make the parser request 
-			parser.parseURL(result.rows[0].url,function(error,feed){
-				// iterate over the parser results
-				for (var i=0;i< feed.items.length;i++){
-					let feedItem =feed.items[i]
-					bbc.push({
-						 	title:feedItem.title,
-							contentSnippet:feedItem.contentSnippet,
-							content:feedItem.content,
-							link:feedItem.link
-					})
-				}
-				 counter+=1;
-				 console.log("Counter check(1):"+counter)
-				if(counter == 6){
-					let context={bbc,cnn,cbn,nyt,wired,verge};
-					console.log("BBC context")
-				 	response.render('../views/users/feed',context);
-				}
-			})
+	const newsParser = (request, response) => {
+		var container=[]
+		// if true then standard else display preferencefeed
+		feed.allFeeds(function(err,result){
+			if(err){
+				console.log("query error:", err.stack)
+			}else{
+				console.log("Result Length")
+				console.log(result.rows.length);
 
-			counter = 0;
-			parser.parseURL(result.rows[1].url,function(error,feed){
-				for (var i=0;i<feed.items.length;i++){
-					let feedItem = feed.items[i]
-					cnn.push({
-							 title:feedItem.title,
-							 content: feedItem.content,
-							 link: feedItem.link
+				//Before parser we should set conditional such that when the result.length is not all then we just carry out 
+				//to do the parsing with the result(we need filter for the result)
 
-					})
-				}
-				  
-				counter+=1;
-				console.log("Counter check(2):"+counter)
-				if(counter == 6){
-					let context={bbc,cnn,cbn,nyt,wired,verge};
-					// console.log(context)
-				 	response.render('../views/users/feed',context);
-				}
-				
-			})
-				// console.log(bbcObj)
-				console.log("3: After callbacks")
-				console.log(result.rows)
-				counter = 0;
-			parser.parseURL(result.rows[2].url,function(error,feed){
-				for (var i=0;i<feed.items.length;i++){
-					let feedItem = feed.items[i]
-					cbn.push({
-							 title:feedItem.title,
-							 content: feedItem.content,
-							 link: feedItem.link
+				//iterate through the different urls
+				countURLsParsed=0
+				for(let i = 0; i < result.rows.length;i++){
+					//need conditional to parse different results
+					//try putting this reult.rows[i].url in another array
+					parser.parseURL(result.rows[i].url,function(error,feed){
+						console.log("Feed item length")
+
+						console.log("Result row length")
+						console.log(result.rows[i].url)
+						//iterate through the items that the url parser returns
+						
+						var feedItemObj = {};
+						for(var j=0;j<feed.items.length;j++){
+							let feedItem=feed.items[j];
+
+							if(container[i] == undefined){
+								container[i]=[];
+							}
+
+							container[i].push({
+								 title:feedItem.title,
+								 content: feedItem.content,
+								 link: feedItem.link
+
+							})
+						}
+
+
+						countURLsParsed+=1
+						if(countURLsParsed == result.rows.length){
+							let context ={foo : container}
+							//put conditional that if your are a techie then i curate the content and then response render
+							response.render("../views/users/feed",context)
+
+						}
 
 					})
-				}	
-
-				counter+=1;
-				console.log("Counter Check(3):"+counter)
-				if(counter == 6){
-					let context={bbc,cnn,cbn,nyt,wired,verge}
-					response.render("../views/users/feed",context)
 				}
-			})
+			}
+		
+		})	
+	
+	}
+	const techFeed = (request,response) => {
+		feed.preferenceFeed(function(err,result){
+			if(err){
+				console.log("query error",err.stack)
+			}else{
+				// response.render("../views/feed/techfeed")
+				response.render("../views/feed/techfeed")
+			}
+		})
+	}
+
+	const newsFeed = (request,response) => {
+		feed.preferenceFeed(function(err,result){
+			if(err){
+				console.log("query error",err.stack)
+			}else{
+				// response.render("../views/feed/techfeed")
+				response.render("../views/feed/newsfeed")
+			}
+		})
+	}
 
 
-			counter = 0;
-			parser.parseURL(result.rows[3].url,function(error,feed){
-				for (var i=0;i<feed.items.length;i++){
-					let feedItem = feed.items[i]
-					nyt.push({
-							 title:feedItem.title,
-							 content: feedItem.content,
-							 link: feedItem.link
+	const unicornFeed = (request,response) => {
+		feed.preferenceFeed(function(err,result){
+			if(err){
+				console.log("query error",err.stack)
+			}else{
+				// response.render("../views/feed/techfeed")
+				response.render("../views/feed/unicornfeed")
+			}
+		})
+	}
 
-					})
-				}	
-
-				counter+=1;
-				console.log("Counter check(4):"+counter)
-				if(counter == 6){
-					let context={bbc,cnn,cbn,nyt,wired,verge}
-					response.render("../views/users/feed",context)
-				}
-			})
-
-			console.log(result.rows[4])
-			//Block Repeat for Wired tech site
-			counter = 0;
-			parser.parseURL(result.rows[4].url,function(error,feed){
-				console.log(feed)
-				for (var i=0;i<feed.items.length;i++){
-					let feedItem = feed.items[i]
-					wired.push({
-							 title:feedItem.title,
-							 content: feedItem.content,
-							 link: feedItem.link
-
-					})
-				}	
-
-				counter+=1;
-				console.log("Counter check(5):"+counter)
-				if(counter == 6){
-					let context={bbc,cnn,cbn,nyt,wired,verge}
-					response.render("../views/users/feed",context)
-				}
-			})
-
-
-			//Block Repeat for Verge tech site
-			counter = 0;
-			parser.parseURL(result.rows[5].url,function(error,feed){
-				console.log(feed)
-				for (var i=0;i<feed.items.length;i++){
-					let feedItem = feed.items[i]
-					verge.push({
-							 title:feedItem.title,
-							 content: feedItem.content,
-							 link: feedItem.link
-					})
-				}	
-
-				counter+=1;
-				console.log("Counter check(5):"+counter)
-				if(counter == 6){
-					let context={bbc,cnn,cbn,nyt,wired,verge}
-					response.render("../views/users/feed",context)
-				}
-			})
-
-
-
-
-
-				
-				// console.log("Context content")
-				// console.log(context)
-				// let context={ bbc,
-				// 			reddit}
-				// 			console.log(context)
-				// 			console.log("Context context context")
-				// response.render('../views/users/home',context);
-		}
-	})
-}	
 
 
 
 
 	return{
 		curate,
-		newsParser
-	}
+		newsParser,
+		techFeed,
+		newsFeed,
+		unicornFeed
+	};
 }
 
 

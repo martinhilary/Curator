@@ -3,6 +3,12 @@ h1{
     text-align: center;
 }
 
+.curates{
+
+  display: inline-block;
+}
+
+
 .newsFeed{
 	border-style:blue; 
 }
@@ -18,9 +24,13 @@ h1{
 	height:900px;
 	width: 900px;
 	margin:auto;
-  overflow: scroll;
+  overflow: auto;
 }
-
+#loginboiler{
+  border: 1px solid black;
+  width: 300px;
+  height: 500px;
+}
 #title{
 	font-size:30px;
 }
@@ -38,6 +48,10 @@ h1{
 
 }
 
+#vergeTitle{
+  width: 800px;
+}
+
 #searchBar{
      position: absolute;
      height: 30px;
@@ -51,6 +65,39 @@ h1{
 #searchDiv{
   text-align: center;
 }
+
+#feedHeader{
+  font-family: 'Knewave', cursive;
+  font-size: 50px;
+}
+#aboutjsx{
+  font-family: 'Gaegu', cursive;
+  text-align: center;
+  width: 50%;
+  color: chocolate;
+  font-weight: 20px;
+  position: relative;
+  left: 25%;
+  top: 30%;
+  font-size: 180%;
+}
+#alignabout{
+  top: 150px;
+  position: relative;
+}
+#maincurate{
+  display: block;
+}
+#tech{
+  float: left;
+}
+#news{
+  float:left;
+}
+#startup{
+  float:left;
+}
+
 .curate{
   font-family: 'Gaegu', cursive;
   font-size: 30px;
@@ -60,42 +107,65 @@ h1{
   display: inline-block;
   margin-right: 50px;
 }
+
+.feedElements{
+  display: flex;
+  height: 50px;
+}
 .homelink{
   display: inline-block;
   width: 30px;
   border:1px solid green ; 
+
+  text-align: center;
+
 }
 
 .feedBorder{
-  border: 1px solid red;
-  border:1px solid yellow ;
+  border: 1px solid black;
+  height: 50px;
+  flex-wrap:nowrap;
   /*height:50px; */
 }
 
 .homeFeed{
-  display: inline-block;
   white-space: nowrap;
-  border:1px solid blue ; 
+
   font-size: 10px;
+  flex:1;
+  max-width: 876px;
   /*width:9%;*/
 }
 .titleFeed{
-  display: inline-block;
   white-space: nowrap;
-  border:1px solid black ; 
-  width: 39%;
-  font-size: 10px;
+  min-width:20%;
+  max-width: 80%;
+  font-size: 15px;
+  display: inline-block;
+  overflow: hidden;
 }
 .contentFeed{
-  display: inline-block;
   white-space: nowrap;
+  width:50%;
+  font-size: 15px;
+  display: inline-block;
   overflow: hidden;
-  border:1px solid purple ; 
-  width: 40%;
-  font-size: 10px;
+
 }
 
 
+.shortFeed{
+  width:100%;
+  text-align: center;
+}
+a.homelink{
+  width: 100px;
+  background-color: red;
+}
+a.homefeed{
+  background-color: blue;
+  font-family: 'Playfair Display', serif;
+}
 
 
 
@@ -112,6 +182,10 @@ img{
 }
 ul{
   list-style-type: none;
+}
+div.feed{
+  width:1000px;
+  color: hotpink;
 }
 .nav ul {
   list-style: none;
@@ -159,7 +233,19 @@ ul{
     display: inline-block;
     margin-right: -4px;
   }
+  .size{
+    height: 250px; 
+    width: 250px; 
+    padding-right: 20px;
+    text-align: center;
+    padding-left: 10px;
+  }
+
+  #loginform{
+    text-align: center;
+  }
  
+
   /* Options 2 - Float
   .nav li {
     float: left;

@@ -32,12 +32,16 @@ var user=require('../models/user.js')(db)
 const home=(request,response)=>{
   response.render("../views/users/home")
 }
+
 const register=(request,response)=>{
   response.render("../views/users/register")
 }
 
 const login= (request,response)=>{
   response.render("../views/users/login");
+}
+const about=(request,response)=>{
+  response.render("../views/users/about");
 }
 
 const createNew =(request,response)=>{
@@ -47,7 +51,7 @@ const createNew =(request,response)=>{
       console.log("query error",err.stack)
     }else{
       let user_id=result.rows[0].id
-      response.send("Create a user with an id: "+password_hash)
+      response.render("../views/users/home")
     }  
   })
 }
@@ -57,20 +61,20 @@ const createNew =(request,response)=>{
 const Authentications =(request,response)=>{
   let password= sha256(request.body.password);
     user.userAuthentication(request.body.email,request.body.password,(err,result)=>{
-      console.log(result);
+      // console.log(result);
       let passwordCompare=result.rows[0].password_hash;
       let user_id=result.rows[0].id;
       if(err){
         console.log("query error",err.stack)
       }else{
-        console.log("error piece")
-        console.log(password);
-        console.log(passwordCompare);
+        // console.log("error piece")
+        // console.log(password);
+        // console.log(passwordCompare);
         if(passwordCompare == password){
           console.log("You are logged in")
           response.cookie("logged in","true")
           response.cookie("user_id",user_id )
-          response.send("You are logged in"+user_id)
+          response.render("../views/users/home")
         }
         else{
           response.redirect("/");
@@ -83,6 +87,7 @@ const Authentications =(request,response)=>{
     home,
     login,
     register,
+    about,
     createNew,
     Authentications
   };
