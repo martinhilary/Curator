@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/martinhilary/Curator/issues"
   },
-  "homepage": "https://github.com/martinhilary/Curator#readme"
+  "homepage": "https://github.com/martinhilary/Curator#readme",
+  "dependencies": {
+    "pg": "^7.4.3"
+  }
 }

@@ -3,6 +3,7 @@
 //require the url library
 //this comes with node, so no need to yarn add
 const url = require('url');
+const pg =require('pg')
 
 //check to see if we have this heroku environment variable
 if( process.env.DATABASE_URL ){
